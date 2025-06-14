@@ -4,12 +4,26 @@ import products from "../data/Products";
 import Container from "../components/Container";
 import Rating from "../components/Rating";
 import BreadCrumb from "../components/BreadCrumb";
+import useCardStore from "../store/useCardStore";
 
 function ProductDetail() {
   const { productId } = useParams();
-  // console.log(productId);
+  const CurrentProduct = products.find(
+    (product) => product.id == productId // Use loose == for string/number mismatch
+  );
 
-  const CurrentProduct = products.find((product) => product.id == productId);
+  const { carts, addCard } = useCardStore();
+
+  const isInCart = carts.find((el) => el.productId === CurrentProduct.id);
+
+  const handleAddToCart = () => {
+    const newCard = {
+      id: Date.now(),
+      productId: CurrentProduct.id,
+      quantity: 1,
+    };
+    addCard(newCard);
+  };
 
   return (
     <>
@@ -32,15 +46,28 @@ function ProductDetail() {
               <p>{CurrentProduct.description}</p>
               <Rating rate={CurrentProduct.rating.rate} />
               <div className="flex justify-between items-center w-full">
-                <p> Price:{CurrentProduct.price}</p>
-                <button className="text-sm border border-black px-5 py-2">
-                  Add to Card
-                </button>
+                <p>Price: ${CurrentProduct.price}</p>
               </div>
+
+              {isInCart ? (
+                <button
+                  className="text-sm border border-black bg-black text-white px-5 py-2"
+                  disabled
+                >
+                  Added
+                </button>
+              ) : (
+                <button
+                  onClick={handleAddToCart}
+                  className="text-sm border border-black px-5 py-2"
+                >
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </div>
-      </Container>{" "}
+      </Container>
     </>
   );
 }
