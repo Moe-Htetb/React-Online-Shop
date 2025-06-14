@@ -10,7 +10,6 @@ function ProductDetail() {
   // console.log(productId);
 
   const CurrentProduct = products.find((product) => product.id == productId);
-  console.log(CurrentProduct);
 
   return (
     <>

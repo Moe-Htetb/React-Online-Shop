@@ -8,7 +8,7 @@ export default function App() {
   // console.log(Footer);
 
   return (
-    <div className="p-5 ">
+    <div className="px-10">
       <Header />
       <CategorySection />
       <ProductSection />

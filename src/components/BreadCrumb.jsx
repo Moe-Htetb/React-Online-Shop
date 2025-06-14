@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 
 function BreadCrumb({ CurrentPageTitle }) {
   return (
-    <div className="w-full flex gap-3 ml-5 md:ml-0">
-      <Link to="/">Home</Link>
+    <div className="w-full flex gap-3 ml-5 md:ml-0 my-3">
+      <Link to="/" className="text-xl font-semibold">
+        Home
+      </Link>
       <span>/</span>
-      <Link to="/">{CurrentPageTitle}</Link>
+      <Link to="/" className="text-xl font-semibold">
+        {CurrentPageTitle}
+      </Link>
     </div>
   );
 }

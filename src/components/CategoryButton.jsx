@@ -1,12 +1,20 @@
 import React from "react";
+import useCategoryStore from "../store/useCategoryStore";
 
-const CategoryButton = ({ CategoryName, current }) => {
+const CategoryButton = ({ Category: { id, name, isActive } }) => {
+  const { activeCategory } = useCategoryStore();
+
+  const onClickHandler = () => {
+    activeCategory(id);
+  };
+
   return (
     <button
-      className={`border-black border px-4 py-2 mx-1 text-nowrap 
-         ${current && "bg-black text-white "}   `}
+      onClick={onClickHandler}
+      className={`border-black border px-4 py-2 mx-1 whitespace-nowrap 
+        ${isActive ? "bg-black text-white" : "bg-white text-black"}`}
     >
-      {CategoryName}
+      {name}
     </button>
   );
 };
