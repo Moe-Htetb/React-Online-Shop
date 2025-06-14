@@ -1,15 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import products from "../data/Products";
+
 import Container from "../components/Container";
 import Rating from "../components/Rating";
 import BreadCrumb from "../components/BreadCrumb";
 import useCardStore from "../store/useCardStore";
+import useProductStore from "../store/useProductStore";
 
 function ProductDetail() {
-  const { productId } = useParams();
+  const { products } = useProductStore();
+  const { productSlug } = useParams();
   const CurrentProduct = products.find(
-    (product) => product.id == productId // Use loose == for string/number mismatch
+    (product) => product.slug == productSlug
   );
 
   const { carts, addCard } = useCardStore();

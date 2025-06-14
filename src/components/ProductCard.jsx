@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
 
   const handleCart = () => {
-    navigate(`/ProductDetail/${product.id}`);
+    navigate(`/ProductDetail/${product.slug}`);
   };
   const handleAdded = (e) => {
     e.stopPropagation();
